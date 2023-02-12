@@ -82,10 +82,25 @@ namespace funstras {
         return x_k;
     }
 
-    cpp_dec_float_50 sin_t(cpp_dec_float_50 a) {
-        return sin(a);
-    }
+    /***
+    * Placeholder de la funcion sin_t de verdad :D
+    * @param x
+    * @return S_k1 aproximacion de la funcion seno(x)
+    */
+    boost::multiprecision::cpp_dec_float_50 sin_t(boost::multiprecision::cpp_dec_float_50 x) {
+        cpp_dec_float_50  S_k;
+        cpp_dec_float_50  S_k1;
+        // pendiente: validar numeros Reales, excluir complejos
+        for(int iter=0; iter<max_iter;iter++){
+            S_k.assign( power_t(-1,iter) * power_t(x, 2*iter + 1) * divi_t(fact_t(2*iter + 1)));
+            S_k1.assign( power_t(-1,iter+1) * power_t(x, 2*(iter+1) + 1) * divi_t(fact_t(2*(iter+1) + 1)));
 
+            if(abs(S_k1 - S_k < tol)){
+                return S_k1;
+            }
+            S_k.assign(S_k1);
+        }
+    }
 
 
     /***
@@ -106,14 +121,23 @@ namespace funstras {
     }
 
     /***
-     * Placeholder de la funcion cos_t de verdad :D
-     * @param x
-     * @return
-     */
+        * Placeholder de la funcion cos_t de verdad :D
+        * @param x
+        * @return S_k1 aproximacion de la funcion cos(x)
+        */
     boost::multiprecision::cpp_dec_float_50 cos_t(boost::multiprecision::cpp_dec_float_50 x) {
-        return cos(x);
+        cpp_dec_float_50 S_k;
+        cpp_dec_float_50 S_k1;
+        // pendiente: validar numeros Reales, excluir complejos
+        for(int iter=0; iter<max_iter;iter++){
+            S_k.assign( power_t(-1,iter) * power_t(x, 2*iter) * divi_t(fact_t(2*iter)));
+            S_k1.assign( power_t(-1,iter+1) * power_t(x, 2*(iter+1)) * divi_t(fact_t(2*(iter+1))));
 
-    }
+            if(abs(S_k1 - S_k < tol)){
+                return S_k1;
+            }
+            S_k.assign(S_k1);
+        }
 
     /***
      * Placeholder de la funcion cosh_t de verdad :D
@@ -220,6 +244,14 @@ namespace funstras {
         }
     }
 
+    /**
+     * Funcion raiz cuadrada de X
+     * @param x
+     * @return aproximacion de la sqrt(x)
+     */
+    boost::multiprecision::cpp_dec_float_50 sqrt_t(boost::multiprecision::cpp_dec_float_50 x) {
+        return root_t(x, 2); // se invoca a una funcion existente con indice 2
+    }
 
     /**
      *
