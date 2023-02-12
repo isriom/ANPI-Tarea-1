@@ -129,16 +129,16 @@ namespace funstras {
         cpp_dec_float_50 S_k;
         cpp_dec_float_50 S_k1;
         // pendiente: validar numeros Reales, excluir complejos
-        for(int iter=0; iter<max_iter;iter++){
-            S_k.assign( power_t(-1,iter) * power_t(x, 2*iter) * divi_t(fact_t(2*iter)));
-            S_k1.assign( power_t(-1,iter+1) * power_t(x, 2*(iter+1)) * divi_t(fact_t(2*(iter+1))));
+        for (int iter = 0; iter < max_iter; iter++) {
+            S_k.assign(power_t(-1, iter) * power_t(x, 2 * iter) * divi_t(fact_t(2 * iter)));
+            S_k1.assign(power_t(-1, iter + 1) * power_t(x, 2 * (iter + 1)) * divi_t(fact_t(2 * (iter + 1))));
 
-            if(abs(S_k1 - S_k < tol)){
+            if (abs(S_k1 - S_k < tol)) {
                 return S_k1;
             }
             S_k.assign(S_k1);
         }
-
+    }
     /***
      * Placeholder de la funcion cosh_t de verdad :D
      * @param x
