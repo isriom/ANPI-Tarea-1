@@ -35,27 +35,19 @@ namespace funstras {
     cpp_dec_float_50 power_t(cpp_dec_float_50 x, cpp_dec_float_50 y);
 
     cpp_dec_float_50 divi_t_inital_value(cpp_dec_float_50 a) {
-        cpp_dec_float_50 x = 10;
-        cpp_dec_float_50 y = -16;
-        cpp_dec_float_50  eps = 2.2204*power_t(x,y);
-        cpp_dec_float_50  power=0;
+        cpp_dec_float_50  eps = 2.2204*power_t(10,-16);
         if(a>=fact_t(100)){
             return 0;
         }else if(a>fact_t(80) && a<fact_t(100)){
-            power=15;
-            return power_t(eps,power);
+            return power_t(eps,15);
         }else if(a>fact_t(60) && a<=fact_t(80)){
-            power=11;
-            return power_t(eps,power);
+            return power_t(eps,11);
         }else if(a>fact_t(40) && a<=fact_t(60)){
-            power=8;
-            return power_t(eps,power);
+            return power_t(eps,8);
         }else if(a>fact_t(20) && a<=fact_t(40)){
-            power=4;
-            return power_t(eps,power);
+            return power_t(eps,4);
         }else{
-            power=2;
-            return power_t(eps,power);
+            return power_t(eps,2);
         }
     }
 
@@ -78,11 +70,11 @@ namespace funstras {
         cpp_dec_float_50 x_k = divi_t_inital_value(x);
         cpp_dec_float_50 x_k1 = 0;
         for(int iter=0;iter<max_iter;iter++){
-            x_k1 = x_k*(2-x*x_k);
+            x_k1.assign(x_k*(2-x*x_k));
             if(abs(x_k1-x_k)<tol*x_k1){
                 return x_k1;
             }
-            x_k = x_k1;
+            x_k.assign(x_k1);
             if(iter==max_iter-1){
                 return x_k1;
             }
@@ -90,15 +82,27 @@ namespace funstras {
         return x_k;
     }
 
+    cpp_dec_float_50 sin_t(cpp_dec_float_50 a) {
+        return sin(a);
+    }
+
+
 
     /***
-     * Placeholder de la funcion sin_t de verdad :D
+     * Placeholder de la funcion sinh_t de verdad :D
      * @param x
      * @return
      */
-    boost::multiprecision::cpp_dec_float_50 sin_t(boost::multiprecision::cpp_dec_float_50 x) {
-        return sin(x);
-
+    cpp_dec_float_50 sinh_t(cpp_dec_float_50 a) {
+        cpp_dec_float_50 S_k = a;
+        cpp_dec_float_50 S_k1 = 0;
+        for(int iter=1;iter<max_iter;iter++){
+            S_k1.assign(S_k+ power_t(a,2*iter+1)* divi_t(fact_t(2*iter+1)));
+            if(abs(S_k1-S_k)<tol){
+                return S_k1;
+            }
+            S_k.assign(S_k1);
+        }
     }
 
     /***
@@ -111,14 +115,48 @@ namespace funstras {
 
     }
 
-    /**
-     *
+    /***
+     * Placeholder de la funcion cosh_t de verdad :D
      * @param x
      * @return
      */
-    boost::multiprecision::cpp_dec_float_50 tan_t(boost::multiprecision::cpp_dec_float_50 x) {
-        return sin_t(x) * divi_t(cos_t(x));
+    cpp_dec_float_50 cosh_t(cpp_dec_float_50 a) {
+        cpp_dec_float_50 S_k = 1;
+        cpp_dec_float_50 S_k1 = 0;
+        for(int iter=1;iter<max_iter;iter++){
+            S_k1.assign(S_k+ power_t(a,2*iter)* divi_t(fact_t(2*iter)));
+            if(abs(S_k1-S_k)<tol){
+                return S_k1;
+            }
+            S_k.assign(S_k1);
+        }
     }
+
+
+    /***
+     * Placeholder de la funcion sec_t de verdad :D
+     * @param x
+     * @return
+     */
+    cpp_dec_float_50 sec_t(cpp_dec_float_50 a) {
+        return divi_t(cos_t(a));
+    }
+
+    cpp_dec_float_50 tan_t(cpp_dec_float_50 a);
+
+/***
+     * Placeholder de la funcion cot_t de verdad :D
+     * @param x
+     * @return
+     */
+    cpp_dec_float_50 cot_t(cpp_dec_float_50 a) {
+        return divi_t(tan_t(a));
+    }
+
+    cpp_dec_float_50 tan_t(cpp_dec_float_50 x) {
+        return sin_t(x) * divi_t(cos_t(x));;
+    }
+
 
     /**
      *
@@ -126,7 +164,7 @@ namespace funstras {
      * @return
      * @throw std::domain_error para valores x iguales o menores que 0
      */
-    boost::multiprecision::cpp_dec_float_50 ln_t(boost::multiprecision::cpp_dec_float_50 x) {
+    cpp_dec_float_50 ln_t(boost::multiprecision::cpp_dec_float_50 x) {
         if (x <= 0) {
             throw std::domain_error(" x debe ser mayor a 0");
         }
@@ -189,7 +227,7 @@ namespace funstras {
      * @return
      * @throw std::domain_error para valores x iguales o menores que 0
      */
-    boost::multiprecision::cpp_dec_float_50 asin_t(boost::multiprecision::cpp_dec_float_50 x) {
+    cpp_dec_float_50 asin_t(boost::multiprecision::cpp_dec_float_50 x) {
         boost::multiprecision::cpp_dec_float_50 S_k = x;
         boost::multiprecision::cpp_dec_float_50 S_k1 = S_k + (divi_t(6) * power_t(x, 3));
         for (int i = 2; i < max_iter; ++i) {
@@ -201,6 +239,19 @@ namespace funstras {
                                       power_t(x, 2 * i + 1));
         }
         return S_k1;
+    }
+
+
+    cpp_dec_float_50 exp_t(cpp_dec_float_50 a){
+        cpp_dec_float_50 S_k = 1;
+        cpp_dec_float_50 S_k1 = 0;
+        for(int iter=1;iter<max_iter;iter++){
+            S_k1.assign(S_k+power_t(a,iter)* divi_t(fact_t(iter)));
+            if(abs(S_k1-S_k)<tol){
+                return S_k1;
+            }
+            S_k.assign(S_k1);
+        }
     }
 
 
