@@ -102,7 +102,6 @@ namespace funstras {
         }
     }
 
-
     /***
      * Placeholder de la funcion sinh_t de verdad :D
      * @param x
@@ -156,6 +155,14 @@ namespace funstras {
         }
     }
 
+    /***
+    * Placeholder de la funcion tanh_t de verdad :D
+    * @param x
+    * @return aproximacion de la funcion tanh(x)
+    */
+    boost::multiprecision::cpp_dec_float_50 tanh_t(boost::multiprecision::cpp_dec_float_50 x) {
+        return sinh_t(x) * divi_t(cosh(x)); // tanh(x) = sinh(x)/cosh(x)
+    }
 
     /***
      * Placeholder de la funcion sec_t de verdad :D
