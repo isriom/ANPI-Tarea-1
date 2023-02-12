@@ -9,6 +9,9 @@
 #include "math.h"
 #include <boost/multiprecision/cpp_dec_float.hpp>
 
+using namespace boost::multiprecision;
+
+
 #define pi_t 3.14159265358979323846
 #define max_iter 2500
 #define tol 0.00000001
@@ -20,7 +23,7 @@ namespace funstras {
      * @param x
      * @return
      */
-    int fact_t(int x) {
+    cpp_dec_float_50 fact_t(int x) {
         if (x != 1) {
             return fact_t(x - 1) * x;
         } else {
@@ -29,14 +32,31 @@ namespace funstras {
 
     }
 
-    /***
-     * Placeholder de la funcion divi_t de verdad :D
-     * @param x
-     * @return
-     */
-    boost::multiprecision::cpp_dec_float_50 divi_t(boost::multiprecision::cpp_dec_float_50 x) {
-        return 1 / x;
+    cpp_dec_float_50 power_t(cpp_dec_float_50 x, cpp_dec_float_50 y);
 
+    cpp_dec_float_50 divi_t_inital_value(cpp_dec_float_50 a) {
+        cpp_dec_float_50 x = 10;
+        cpp_dec_float_50 y = -16;
+        cpp_dec_float_50  eps = 2.2204*power_t(x,y);
+        cpp_dec_float_50  power=0;
+        if(a>=fact_t(100)){
+            return 0;
+        }else if(a>fact_t(80) && a<fact_t(100)){
+            power=15;
+            return power_t(eps,power);
+        }else if(a>fact_t(60) && a<=fact_t(80)){
+            power=11;
+            return power_t(eps,power);
+        }else if(a>fact_t(40) && a<=fact_t(60)){
+            power=8;
+            return power_t(eps,power);
+        }else if(a>fact_t(20) && a<=fact_t(40)){
+            power=4;
+            return power_t(eps,power);
+        }else{
+            power=2;
+            return power_t(eps,power);
+        }
     }
 
     /***
@@ -44,11 +64,32 @@ namespace funstras {
      * @param x
      * @return
      */
-    boost::multiprecision::cpp_dec_float_50
-    power_t(boost::multiprecision::cpp_dec_float_50 x, boost::multiprecision::cpp_dec_float_50 y) {
-        return pow(x, y);
-
+    cpp_dec_float_50 power_t(cpp_dec_float_50 x, cpp_dec_float_50 y) {
+        cpp_dec_float_50 result = pow(x, y);
+        return result;
     }
+
+    /***
+     * Placeholder de la funcion divi_t de verdad :D
+     * @param x
+     * @return
+     */
+    cpp_dec_float_50 divi_t(cpp_dec_float_50 x) {
+        cpp_dec_float_50 x_k = divi_t_inital_value(x);
+        cpp_dec_float_50 x_k1 = 0;
+        for(int iter=0;iter<max_iter;iter++){
+            x_k1 = x_k*(2-x*x_k);
+            if(abs(x_k1-x_k)<tol*x_k1){
+                return x_k1;
+            }
+            x_k = x_k1;
+            if(iter==max_iter-1){
+                return x_k1;
+            }
+        }
+        return x_k;
+    }
+
 
     /***
      * Placeholder de la funcion sin_t de verdad :D
@@ -137,7 +178,7 @@ namespace funstras {
             }
             return S_k1;
         } else {
-            return power_t(x, y);
+            return funstras::power_t(x, y);
         }
     }
 
@@ -157,7 +198,7 @@ namespace funstras {
             }
             S_k.assign(S_k1);
             S_k1.assign(S_k + fact_t(2 * i) * divi_t(power_t(4, i) * power_t(fact_t(i), 2) * (2 * i + 1)) *
-                              power_t(x, 2 * i + 1));
+                                      power_t(x, 2 * i + 1));
         }
         return S_k1;
     }
