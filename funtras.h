@@ -280,12 +280,15 @@ namespace funstras {
      * @throw std::domain_error para valores x iguales o menores que 0
      */
     cpp_dec_float_50 asin_t(boost::multiprecision::cpp_dec_float_50 x) {
+
         boost::multiprecision::cpp_dec_float_50 S_k = x;
         boost::multiprecision::cpp_dec_float_50 S_k1 = S_k + (divi_t(6) * power_t(x, 3));
+
         for (int i = 2; i < max_iter; ++i) {
             if (abs(S_k1 - S_k) < tol) {
                 return S_k1;
             }
+            std::cout << 1;
             S_k.assign(S_k1);
             S_k1.assign(S_k + fact_t(2 * i) * divi_t(power_t(4, i) * power_t(fact_t(i), 2) * (2 * i + 1)) *
                                       power_t(x, 2 * i + 1));
@@ -321,7 +324,38 @@ namespace funstras {
     }
 
     cpp_dec_float_50 atan_t(boost::multiprecision::cpp_dec_float_50 x){
-        //return divi_t(tan_t());
+        cpp_dec_float_50 S_k = x;
+        cpp_dec_float_50 S_k1 = 0;
+
+        if(x>=-1 and x<=1){
+            //S_k1 = -1* power_t(x,3)* divi_t(3);
+            for(int n =0; n<=max_iter;n++){
+                S_k1.assign(power_t(-1,n)* power_t(x,2*n+1)* divi_t(2*n+1));
+                if(abs(S_k1-S_k)<tol){
+                    return S_k;
+                }
+                S_k.assign(S_k1);
+            }
+        }
+        else if(x>1){
+            for(int n =0; n<=max_iter;n++){
+                S_k1.assign(pi_t*divi_t(2)-(power_t(-1,n)*divi_t((2*n+1)*power_t(x,2*n+1))));
+                if(abs(S_k1-S_k)<tol){
+                    return S_k;
+                }
+                S_k.assign(S_k1);
+            }
+        }else{ //x<1
+            for(int n =0; n<=max_iter;n++){
+                S_k1.assign(-pi_t*divi_t(2)-(power_t(-1,n)*divi_t((2*n+1)*power_t(x,2*n+1))));
+                if(abs(S_k1-S_k)<tol){
+                    return S_k;
+                }
+                S_k.assign(S_k1);
+            }
+        }
+
+
     }
 
     cpp_dec_float_50 csc_t(boost::multiprecision::cpp_dec_float_50 x){

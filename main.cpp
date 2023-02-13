@@ -33,6 +33,6 @@ int main() {
     //std::cout << std::setprecision(50) << sin_t(45) << std::endl;
     //std::cout << std::setprecision(50) << sin_t(pi_t) << std::endl;
 
-    std::cout<<std::setprecision(50) << power_t(5,5);
+    //std::cout<<std::setprecision(50) << atan(-1);
     return 0;
 }
