@@ -57,7 +57,20 @@ namespace funstras {
      * @return
      */
     cpp_dec_float_50 power_t(cpp_dec_float_50 x, cpp_dec_float_50 y) {
-        cpp_dec_float_50 result = pow(x, y);
+        cpp_dec_float_50 result = 1;
+        if(y==0){
+            return 1;
+        }
+        else if(x==0){
+            return 0;
+        }
+        else{
+            while(y!=0){
+                result*=x;
+                y--;
+            }
+        }
+
         return result;
     }
 
@@ -292,6 +305,29 @@ namespace funstras {
             S_k.assign(S_k1);
         }
     }
+
+
+
+    cpp_dec_float_50 log_t(boost::multiprecision::cpp_dec_float_50 x, boost::multiprecision::cpp_dec_float_50 y){
+        if(y==1)
+            std::cout<<"Error";
+        else if(x==1)
+            return 0;
+        else if(x==y)
+            return 1;
+        else
+            return ln_t(x)* divi_t(ln_t(y));
+
+    }
+
+    cpp_dec_float_50 atan_t(boost::multiprecision::cpp_dec_float_50 x){
+        //return divi_t(tan_t());
+    }
+
+    cpp_dec_float_50 csc_t(boost::multiprecision::cpp_dec_float_50 x){
+        return divi_t(sin_t(x));
+    }
+
 
 
 }

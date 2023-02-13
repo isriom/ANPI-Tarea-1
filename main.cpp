@@ -1,6 +1,7 @@
 #include <iostream>
 #include <boost/multiprecision/cpp_dec_float.hpp>
 #include "funtras.cpp"
+
 int main() {
 
     using namespace boost::multiprecision;
@@ -32,5 +33,6 @@ int main() {
     //std::cout << std::setprecision(50) << sin_t(45) << std::endl;
     //std::cout << std::setprecision(50) << sin_t(pi_t) << std::endl;
 
+    std::cout<<std::setprecision(50) << power_t(5,5);
     return 0;
 }
