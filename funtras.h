@@ -18,12 +18,17 @@ using namespace boost::multiprecision;
 
 namespace funstras {
 
-    /**
-     *
-     * @param x
-     * @return
+    /**Entradas: x numero al que calcular el factorial
+     * Salidas: Factorial de x
      */
     cpp_dec_float_50 fact_t(int x) {
+        if (x<0){
+            throw std::domain_error("x debe ser mayor o igual a 0");
+        }
+
+        if(x==0){
+            return 1;
+        }
         if (x != 1) {
             return fact_t(x - 1) * x;
         } else {
@@ -183,14 +188,18 @@ namespace funstras {
     cpp_dec_float_50 cot_t(cpp_dec_float_50 a) {
         return divi_t(tan_t(a));
     }
-
+    /***
+     * Entradas: x el valor del angulo del que se obtendra la tangente
+     * Salidas: la tangente de x
+     */
     cpp_dec_float_50 tan_t(cpp_dec_float_50 x) {
         return sin_t(x) * divi_t(cos_t(x));;
     }
 
 
     /**
-     *
+     * Entradas: x valor del que se obtendra el logaritmo
+     * Salidas: logaritmo natural de x
      * @param x
      * @return
      * @throw std::domain_error para valores x iguales o menores que 0
@@ -213,9 +222,8 @@ namespace funstras {
     }
 
     /**
-     *
-     * @param x
-     * @return
+     * Entradas: x el valor al que se le calculara la raiz, y el grado de la raiz
+     * Salidas: la raiz de grado y de x
      * @throw std::domain_error para valor x menores que 0
      * @throw std::domain_error para y pares con x negativos
      */
@@ -261,9 +269,8 @@ namespace funstras {
     }
 
     /**
-     *
-     * @param x
-     * @return
+     * Entradas: x valor del angulo del que se le calculara el arcoseno
+     * Salidas: el arcoseno de x
      * @throw std::domain_error para valores x iguales o menores que 0
      */
     cpp_dec_float_50 asin_t(boost::multiprecision::cpp_dec_float_50 x) {
