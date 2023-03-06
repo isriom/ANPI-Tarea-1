@@ -1,0 +1,6 @@
+﻿  MainForm.cpp
+C:\Users\Daniel\Desktop\Respaldo\GUI Calculadora\Calculadora\Calculadora\MainForm.h(838,29): warning C4101: 'e': unreferenced local variable
+C:\Users\Daniel\Desktop\Respaldo\GUI Calculadora\Calculadora\Calculadora\MainForm.h(842,38): warning C4101: 'e': unreferenced local variable
+C:\Users\Daniel\Desktop\Respaldo\GUI Calculadora\Calculadora\Calculadora\MainForm.cpp(6,33): warning C4829: Possibly incorrect parameters to function main. Consider 'int main(Platform::Array<Platform::String^>^ argv)'
+  MainForm.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+  Calculadora.vcxproj -> C:\Users\Daniel\Desktop\GUI Calculadora\Calculadora\x64\Debug\Calculadora.exe

@@ -1,0 +1,4 @@
+C:\Users\Daniel\Desktop\GUI Calculadora\Calculadora\Calculadora\x64\Debug\Calculadora.vcxproj.AssemblyReference.cache
+C:\Users\Daniel\Desktop\GUI Calculadora\Calculadora\Calculadora\x64\Debug\Calculadora.vcxproj.SuggestedBindingRedirects.cache
+C:\Users\Daniel\Desktop\GUI Calculadora\Calculadora\Calculadora\x64\Debug\Calculadora.MainForm.resources
+C:\Users\Daniel\Desktop\GUI Calculadora\Calculadora\Calculadora\x64\Debug\Calculadora.vcxproj.GenerateResource.cache
