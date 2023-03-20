@@ -101,11 +101,12 @@ public:
         lb_Y->setGeometry(QRect(0, 100, 91, 61));
         x_Field = new QLineEdit(centralwidget);
         x_Field->setObjectName(QString::fromUtf8("x_Field"));
-        x_Field->setEnabled(true);
+        x_Field->setEnabled(false);
         x_Field->setGeometry(QRect(50, 70, 651, 31));
         x_Field->setFrame(true);
         y_Field = new QLineEdit(centralwidget);
         y_Field->setObjectName(QString::fromUtf8("y_Field"));
+        y_Field->setEnabled(false);
         y_Field->setGeometry(QRect(50, 120, 651, 31));
         senh_Btn = new QPushButton(centralwidget);
         senh_Btn->setObjectName(QString::fromUtf8("senh_Btn"));

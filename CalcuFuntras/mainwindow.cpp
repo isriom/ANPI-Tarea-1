@@ -82,7 +82,12 @@ void MainWindow::on_asen_Btn_clicked()
 {
     getLineEditNum();
 
-    resultOperacion = funtras::asin_t(num1);
+    if(num1 > -1 && num1 < 1){
+        resultOperacion = funtras::asin_t(num1);
+        writeLabelResult(resultOperacion);
+    }else{
+        ui->lb_ResultOp->setText(QString("La función arcoseno no se encuentra definida en ese valor"));
+    }
 
     writeLabelResult(resultOperacion);
 }
@@ -92,9 +97,12 @@ void MainWindow::on_acos_Btn_clicked()
 {
     getLineEditNum();
 
-    resultOperacion = funtras::acos_t(num1);
-
-    writeLabelResult(resultOperacion);
+    if(num1 > -1 && num1 < 1){
+        resultOperacion = funtras::acos_t(num1);
+        writeLabelResult(resultOperacion);
+    }else{
+        ui->lb_ResultOp->setText(QString("La función arcocoseno no se encuentra definida en ese valor"));
+    }
 }
 
 
@@ -311,7 +319,7 @@ void MainWindow::on_pushButton_2_clicked()
 void MainWindow::on_pi_Btn_clicked()
 {
     std::ostringstream oss;
-    result = pi_t;
+    result = funtras::pi_t;
     oss << std::fixed << std::setprecision(50) << result;
     writeNumber(QString::fromStdString(oss.str()));
 }
@@ -391,7 +399,7 @@ void MainWindow::on_negative_Btn_clicked()
 void MainWindow::on_pi_half_Btn_clicked()
 {
     std::ostringstream oss;
-    result = pi_t*0.5;
+    result = funtras::pi_t*0.5;
     oss << std::fixed << std::setprecision(50) << result;
     writeNumber(QString::fromStdString(oss.str()));
 }

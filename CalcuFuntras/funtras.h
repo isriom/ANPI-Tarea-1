@@ -7,13 +7,12 @@
 
 using namespace boost::multiprecision;
 
-#define pi_t 3.14159265358979323846
 #define max_iter 2500
 #define tol 0.00000001
 
 
 namespace funtras{
-
+    cpp_dec_float_50 pi_t=cpp_dec_float_50("3.14159265358979323846");
     /**
      * Funcion factorial de x
      * @param: x numero al que calcular el factorial
@@ -40,7 +39,7 @@ namespace funtras{
     cpp_dec_float_50 power_t(cpp_dec_float_50 x, cpp_dec_float_50 y);
 
     /**
-     * Funcion ... .
+     * Funcion valor inicial de power
      * Esta funcion es recursiva
      * @param: a
      * @return: resultado de la division inicial
@@ -61,14 +60,14 @@ namespace funtras{
             return power_t(eps,2);
         }
     }
-    
+
     /**
      * Funcion division 1/x
      * @param: x numero de tipo cpp_dec_float_50 al que calcular el inverso
      * @return: Inverso de x
      */
     cpp_dec_float_50 divi_t(cpp_dec_float_50 x) {
-        cpp_dec_float_50 x_k = divi_t_inital_value(x);
+        cpp_dec_float_50 x_k = divi_t_inital_value(abs(x));
         cpp_dec_float_50 x_k1 = 0;
         for(int iter=0;iter<max_iter;iter++){
             x_k1.assign(x_k*(2-x*x_k));
@@ -84,57 +83,66 @@ namespace funtras{
     }
 
 
+
+    boost::multiprecision::cpp_dec_float_50 root_t(boost::multiprecision::cpp_dec_float_50 x, boost::multiprecision::cpp_dec_float_50 y);
     /**
      * Funcion potencia x^y
      * @param: x, y
      * @return: result (resultado de la potencia x^y)
      */
     cpp_dec_float_50 power_t(cpp_dec_float_50 x, cpp_dec_float_50 y) {
-        cpp_dec_float_50 result = 1;
-        cpp_dec_float_50 tempy=0;
 
-        if(y==0 && x != 0){
-            return 1;
-        }
-        else if(x==0){
-            return 0;
-        }
-        else if(y ==1){
-            return x;
-        }
-        else if(0>y){
-            while(y!=0){
-                result*=x;
-                y--;
+            cpp_dec_float_50 result = 1;
+            cpp_dec_float_50 tempy=0;
+            cpp_dec_float_50 sign = 1.0;
+
+            if(y==0 && x != 0){
+                return 1;
             }
-        }
-        else if(y<0){
-            tempy = -1*y;
-            while(tempy!=0){
-                result*=x;
-                tempy--;
+            else if(x==0){
+                return 0;
             }
-            result = divi_t(result);
+            else if(y ==1){
+                return x;
+            }
+            else if(y>0){
+                while(y!=0){
+                    result*=x;
+                    y--;
+                }
+            }
+            else if(y<0){
+                tempy = -1*y;
+                while(tempy!=0){
+                    result*=x;
+                    tempy--;
+                }
+                result = copysign(sign,result)* divi_t(abs(result));
+            }
+
+
+
+            return result;
         }
 
 
 
-        return result;
-    }
-
-
-    /**
-     * Funcion seno(x)
-     * @param x el valor del angulo
-     * @return aproximacion del resultado de seno(x)
-      */
+        /**
+         * Funcion seno(x)
+         * @param x el valor del angulo
+         * @return aproximacion del resultado de seno(x)
+          */
     boost::multiprecision::cpp_dec_float_50 sin_t(boost::multiprecision::cpp_dec_float_50 x) {
-        cpp_dec_float_50  S_k = x;
-        cpp_dec_float_50  S_k1 = S_k;
-        for(int iter=0; iter<max_iter;iter++){
-            S_k1.assign(S_k + power_t(-1,iter) * power_t(x, 2*(iter) + 1) * divi_t(fact_t(2*(iter) + 1)));
+        cpp_dec_float_50 S_k = cpp_dec_float_50(x);
+        cpp_dec_float_50 S_k1 = cpp_dec_float_50("0");
+        S_k.assign(x);
 
-            if(abs((S_k1 - S_k) < tol)){
+        for (int iter = 0; iter < max_iter; iter++) {
+
+            S_k1.assign(
+                    S_k + power_t(-1, iter + 1) * power_t(x, 2 * (iter + 1) + 1) * divi_t(fact_t(2 * (iter + 1) + 1)));
+
+            if (abs(S_k1 - S_k) < tol) {
                 return S_k1;
             }
             S_k.assign(S_k1);
@@ -164,18 +172,19 @@ namespace funtras{
       * @return aproximacion de la funcion cos(x)
         */
     boost::multiprecision::cpp_dec_float_50 cos_t(boost::multiprecision::cpp_dec_float_50 x) {
-        cpp_dec_float_50 S_k = x;
-        cpp_dec_float_50 S_k1 = 0;
-        // pendiente: validar numeros Reales, excluir complejos
-        for (int iter = 0; iter < max_iter; iter++) {
-            S_k1.assign(S_k + power_t(-1, iter) * power_t(x, 2 * iter) * divi_t(fact_t(2 * iter)));
+        cpp_dec_float_50 S_k = cpp_dec_float_50("0");
+        cpp_dec_float_50 S_k1 = cpp_dec_float_50("0");
+        S_k.assign(1);
 
+        for (int iter = 0; iter < max_iter; iter++) {
+            S_k1.assign(S_k + power_t(-1, iter + 1) * power_t(x, 2 * (iter + 1)) * divi_t(fact_t(2 * (iter + 1))));
             if (abs(S_k1 - S_k) < tol) {
                 return S_k1;
             }
             S_k.assign(S_k1);
         }
     }
+
 
     /**
      * Funcion coseno hiperbolico de a : cosh(a)
@@ -200,7 +209,7 @@ namespace funtras{
     * @return aproximacion de la funcion tanh(x)
     */
     boost::multiprecision::cpp_dec_float_50 tanh_t(boost::multiprecision::cpp_dec_float_50 x) {
-        return sinh_t(x) * divi_t(cosh(x)); // tanh(x) = sinh(x)/cosh(x)
+        return sinh_t(x) * power_t(cosh(x),-1); // tanh(x) = sinh(x)/cosh(x)
     }
 
     /***
@@ -209,10 +218,10 @@ namespace funtras{
      * @return aproximacion de la funcion sec(a)
      */
     cpp_dec_float_50 sec_t(cpp_dec_float_50 a) {
-        return divi_t(cos_t(a));
+        return power_t(cos_t(a),-1);
     }
 
-    // declaracion 
+    // declaracion
     cpp_dec_float_50 tan_t(cpp_dec_float_50 a);
 
     /**
@@ -221,7 +230,7 @@ namespace funtras{
      * @return aproximacion de la funcion cot(a)
      */
     cpp_dec_float_50 cot_t(cpp_dec_float_50 a) {
-        return divi_t(tan_t(a));
+        return power_t(tan_t(a),-1);
     }
 
     /**
@@ -321,7 +330,7 @@ namespace funtras{
             }
             S_k.assign(S_k1);
             S_k1.assign(S_k + fact_t(2 * i) * divi_t(power_t(4, i) * power_t(fact_t(i), 2) * (2 * i + 1)) *
-                                      power_t(x, 2 * i + 1));
+                              power_t(x, 2 * i + 1));
         }
         return S_k1;
     }
@@ -398,7 +407,7 @@ namespace funtras{
         else if(x==y)
             return 1;
         else
-            return ln_t(x)* divi_t(ln_t(y));
+            return ln_t(x)* power_t(ln_t(y),-1);
 
     }
 
@@ -408,7 +417,7 @@ namespace funtras{
      * @return aproximacion del resultado de la funcion
      */
     cpp_dec_float_50 csc_t(boost::multiprecision::cpp_dec_float_50 x){
-        return divi_t(sin_t(x));
+        return power_t(sin_t(x),-1);
     }
 
     /**
