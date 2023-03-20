@@ -72,12 +72,12 @@ namespace funtras{
         cpp_dec_float_50 x_k1 = 0;
         for(int iter=0;iter<max_iter;iter++){
             x_k1.assign(x_k*(2-x*x_k));
-            if(abs(x_k1-x_k)<tol*x_k1){
+            if(abs(x_k1-x_k)<tol*abs(x_k1)){
                 return x_k1;
             }
             x_k.assign(x_k1);
             if(iter==max_iter-1){
-                return x_k1;
+                return x_k;
             }
         }
         return x_k;
@@ -93,7 +93,7 @@ namespace funtras{
         cpp_dec_float_50 result = 1;
         cpp_dec_float_50 tempy=0;
 
-        if(y==0){
+        if(y==0 && x != 0){
             return 1;
         }
         else if(x==0){
@@ -103,21 +103,23 @@ namespace funtras{
             return x;
         }
         else if(0>y){
-                tempy = -1*y;
+            while(y!=0){
+                result*=x;
+                y--;
+            }
+        }
+        else if(y<0){
+            tempy = -1*y;
             while(tempy!=0){
                 result*=x;
                 tempy--;
             }
-        }
-        else{
-            result = pow(x,y);
+            result = divi_t(result);
         }
 
-        if(0>y)
-            return divi_t(result);
-        else{
-            return result;
-        }
+
+
+        return result;
     }
 
 
@@ -127,11 +129,10 @@ namespace funtras{
      * @return aproximacion del resultado de seno(x)
       */
     boost::multiprecision::cpp_dec_float_50 sin_t(boost::multiprecision::cpp_dec_float_50 x) {
-        cpp_dec_float_50  S_k;
-        cpp_dec_float_50  S_k1;
+        cpp_dec_float_50  S_k = x;
+        cpp_dec_float_50  S_k1 = S_k;
         for(int iter=0; iter<max_iter;iter++){
-            S_k.assign( power_t(-1,iter) * power_t(x, 2*iter + 1) * divi_t(fact_t(2*iter + 1)));
-            S_k1.assign( power_t(-1,iter+1) * power_t(x, 2*(iter+1) + 1) * divi_t(fact_t(2*(iter+1) + 1)));
+            S_k1.assign(S_k + power_t(-1,iter) * power_t(x, 2*(iter) + 1) * divi_t(fact_t(2*(iter) + 1)));
 
             if(abs((S_k1 - S_k) < tol)){
                 return S_k1;
@@ -163,12 +164,11 @@ namespace funtras{
       * @return aproximacion de la funcion cos(x)
         */
     boost::multiprecision::cpp_dec_float_50 cos_t(boost::multiprecision::cpp_dec_float_50 x) {
-        cpp_dec_float_50 S_k;
-        cpp_dec_float_50 S_k1;
+        cpp_dec_float_50 S_k = x;
+        cpp_dec_float_50 S_k1 = 0;
         // pendiente: validar numeros Reales, excluir complejos
         for (int iter = 0; iter < max_iter; iter++) {
-            S_k.assign(power_t(-1, iter) * power_t(x, 2 * iter) * divi_t(fact_t(2 * iter)));
-            S_k1.assign(power_t(-1, iter + 1) * power_t(x, 2 * (iter + 1)) * divi_t(fact_t(2 * (iter + 1))));
+            S_k1.assign(S_k + power_t(-1, iter) * power_t(x, 2 * iter) * divi_t(fact_t(2 * iter)));
 
             if (abs(S_k1 - S_k) < tol) {
                 return S_k1;

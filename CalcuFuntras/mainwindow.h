@@ -20,6 +20,7 @@ class MainWindow : public QMainWindow
     boost::multiprecision::cpp_dec_float_50 resultOperacion=0;
     cpp_dec_float_50 getLineEditNum();
     void writeLabelResult(cpp_dec_float_50 tempResult);
+    void writeNumber(QString num);
 
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -71,6 +72,34 @@ private slots:
     void on_pushButton_clicked();
 
     void on_pushButton_2_clicked();
+
+    void on_pi_Btn_clicked();
+
+    void on_zero_Btn_clicked();
+
+    void on_one_Btn_clicked();
+
+    void on_two_Btn_clicked();
+
+    void on_three_Btn_clicked();
+
+    void on_four_Btn_clicked();
+
+    void on_five_Btn_clicked();
+
+    void on_six_Btn_clicked();
+
+    void on_seven_Btn_clicked();
+
+    void on_eight_Btn_clicked();
+
+    void on_nine_Btn_clicked();
+
+    void on_dot_Btn_clicked();
+
+    void on_negative_Btn_clicked();
+
+    void on_pi_half_Btn_clicked();
 
 private:
     Ui::MainWindow *ui;

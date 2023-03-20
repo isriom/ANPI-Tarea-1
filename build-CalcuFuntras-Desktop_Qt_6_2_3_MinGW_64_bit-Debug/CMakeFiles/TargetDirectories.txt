@@ -1,0 +1,15 @@
+C:/Users/jusfb/Desktop/ANPI/Tareas/ANPI-Tarea-1/build-CalcuFuntras-Desktop_Qt_6_2_3_MinGW_64_bit-Debug/CMakeFiles/list_install_components.dir
+C:/Users/jusfb/Desktop/ANPI/Tareas/ANPI-Tarea-1/build-CalcuFuntras-Desktop_Qt_6_2_3_MinGW_64_bit-Debug/CMakeFiles/CalcuFuntras.dir
+C:/Users/jusfb/Desktop/ANPI/Tareas/ANPI-Tarea-1/build-CalcuFuntras-Desktop_Qt_6_2_3_MinGW_64_bit-Debug/CMakeFiles/install/local.dir
+C:/Users/jusfb/Desktop/ANPI/Tareas/ANPI-Tarea-1/build-CalcuFuntras-Desktop_Qt_6_2_3_MinGW_64_bit-Debug/CMakeFiles/install.dir
+C:/Users/jusfb/Desktop/ANPI/Tareas/ANPI-Tarea-1/build-CalcuFuntras-Desktop_Qt_6_2_3_MinGW_64_bit-Debug/CMakeFiles/edit_cache.dir
+C:/Users/jusfb/Desktop/ANPI/Tareas/ANPI-Tarea-1/build-CalcuFuntras-Desktop_Qt_6_2_3_MinGW_64_bit-Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/jusfb/Desktop/ANPI/Tareas/ANPI-Tarea-1/build-CalcuFuntras-Desktop_Qt_6_2_3_MinGW_64_bit-Debug/CMakeFiles/install/strip.dir
+C:/Users/jusfb/Desktop/ANPI/Tareas/ANPI-Tarea-1/build-CalcuFuntras-Desktop_Qt_6_2_3_MinGW_64_bit-Debug/CMakeFiles/CalcuFuntras_autogen_timestamp_deps.dir
+C:/Users/jusfb/Desktop/ANPI/Tareas/ANPI-Tarea-1/build-CalcuFuntras-Desktop_Qt_6_2_3_MinGW_64_bit-Debug/CMakeFiles/CalcuFuntras_autogen.dir
+C:/Users/jusfb/Desktop/ANPI/Tareas/ANPI-Tarea-1/build-CalcuFuntras-Desktop_Qt_6_2_3_MinGW_64_bit-Debug/multiprecision-Boost_1_81_0/CMakeFiles/install/local.dir
+C:/Users/jusfb/Desktop/ANPI/Tareas/ANPI-Tarea-1/build-CalcuFuntras-Desktop_Qt_6_2_3_MinGW_64_bit-Debug/multiprecision-Boost_1_81_0/CMakeFiles/install.dir
+C:/Users/jusfb/Desktop/ANPI/Tareas/ANPI-Tarea-1/build-CalcuFuntras-Desktop_Qt_6_2_3_MinGW_64_bit-Debug/multiprecision-Boost_1_81_0/CMakeFiles/edit_cache.dir
+C:/Users/jusfb/Desktop/ANPI/Tareas/ANPI-Tarea-1/build-CalcuFuntras-Desktop_Qt_6_2_3_MinGW_64_bit-Debug/multiprecision-Boost_1_81_0/CMakeFiles/rebuild_cache.dir
+C:/Users/jusfb/Desktop/ANPI/Tareas/ANPI-Tarea-1/build-CalcuFuntras-Desktop_Qt_6_2_3_MinGW_64_bit-Debug/multiprecision-Boost_1_81_0/CMakeFiles/list_install_components.dir
+C:/Users/jusfb/Desktop/ANPI/Tareas/ANPI-Tarea-1/build-CalcuFuntras-Desktop_Qt_6_2_3_MinGW_64_bit-Debug/multiprecision-Boost_1_81_0/CMakeFiles/install/strip.dir

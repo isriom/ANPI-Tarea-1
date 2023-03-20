@@ -34,6 +34,17 @@ void MainWindow::writeLabelResult(cpp_dec_float_50 tempResult){
 
 }
 
+void MainWindow::writeNumber(QString num){
+    if(ui->x_Btn->isChecked()){
+        QString text = ui->x_Field->text()+num;
+        ui->x_Field->setText(text);
+    }
+    if(ui->y_Btn->isChecked()){
+        QString text = ui->y_Field->text()+num;
+        ui->y_Field->setText(text);
+    }
+}
+
 void MainWindow::on_senh_Btn_clicked()
 {
 
@@ -295,5 +306,93 @@ void MainWindow::on_pushButton_2_clicked()
     resultOperacion = funtras::root_t(funtras::cos_t(3*funtras::divi_t(7))+funtras::ln_t(2),3)*funtras::divi_t(funtras::sinh_t(funtras::sqrt_t(2)))+funtras::atan_t(funtras::exp_t(-1));
 
     writeLabelResult(resultOperacion);
+}
+
+void MainWindow::on_pi_Btn_clicked()
+{
+    std::ostringstream oss;
+    result = pi_t;
+    oss << std::fixed << std::setprecision(50) << result;
+    writeNumber(QString::fromStdString(oss.str()));
+}
+
+void MainWindow::on_zero_Btn_clicked()
+{
+    writeNumber(ui->zero_Btn->text());
+}
+
+
+void MainWindow::on_one_Btn_clicked()
+{
+    writeNumber(ui->one_Btn->text());
+}
+
+
+void MainWindow::on_two_Btn_clicked()
+{
+    writeNumber(ui->two_Btn->text());
+}
+
+
+void MainWindow::on_three_Btn_clicked()
+{
+    writeNumber(ui->three_Btn->text());
+}
+
+
+void MainWindow::on_four_Btn_clicked()
+{
+    writeNumber(ui->four_Btn->text());
+}
+
+
+void MainWindow::on_five_Btn_clicked()
+{
+    writeNumber(ui->five_Btn->text());
+}
+
+
+void MainWindow::on_six_Btn_clicked()
+{
+    writeNumber(ui->six_Btn->text());
+}
+
+
+void MainWindow::on_seven_Btn_clicked()
+{
+    writeNumber(ui->seven_Btn->text());
+}
+
+
+void MainWindow::on_eight_Btn_clicked()
+{
+    writeNumber(ui->eight_Btn->text());
+}
+
+
+void MainWindow::on_nine_Btn_clicked()
+{
+    writeNumber(ui->nine_Btn->text());
+}
+
+
+void MainWindow::on_dot_Btn_clicked()
+{
+    writeNumber(ui->dot_Btn->text());
+}
+
+
+void MainWindow::on_negative_Btn_clicked()
+{
+    writeNumber(ui->negative_Btn->text());
+}
+
+
+void MainWindow::on_pi_half_Btn_clicked()
+{
+    std::ostringstream oss;
+    result = pi_t*0.5;
+    oss << std::fixed << std::setprecision(50) << result;
+    writeNumber(QString::fromStdString(oss.str()));
 }
 
